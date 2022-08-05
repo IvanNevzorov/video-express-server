@@ -78,15 +78,6 @@ app.get('/archive/:sessionId', async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
-if (env === 'production') {
-  console.log('Setting Up express.static for prod');
-  const buildPath = path.join(__dirname, '..', 'build');
-  app.use(express.static(buildPath));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
-  });
-}
 
 const serverPort = process.env.SERVER_PORT || process.env.PORT || 5000;
 // start express server on port 5000
